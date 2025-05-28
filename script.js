@@ -11,11 +11,10 @@ const columns = Math.floor(canvas.width / fontSize);
 const drops = Array(columns).fill(1);
 
 function draw() {
-  // Slightly transparent black background to create trail effect
   ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = 'rgba(0, 255, 153, 0.15)'; // <-- Reduced opacity here to tone down brightness
+  ctx.fillStyle = 'rgba(0, 255, 153, 0.15)';
   ctx.font = fontSize + 'px monospace';
 
   for (let i = 0; i < drops.length; i++) {
@@ -36,21 +35,19 @@ window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
-  
-// --- Rest of your script.js below ---
 
-// Copy Wallet Address with success/failure handling
+// --- Copy Wallet Address ---
 function copyWallet() {
   const walletInput = document.getElementById("walletAddress");
   walletInput.focus();
   walletInput.select();
-  walletInput.setSelectionRange(0, 99999); // for mobile devices
+  walletInput.setSelectionRange(0, 99999);
   navigator.clipboard.writeText(walletInput.value)
     .then(() => alert("Wallet address copied!"))
     .catch(() => alert("Failed to copy wallet address"));
 }
 
-// Enroll user
+// --- Enroll user ---
 function enroll() {
   const userWallet = document.getElementById("userWallet").value.trim();
   const message = document.getElementById("message");
@@ -65,9 +62,6 @@ function enroll() {
   message.style.color = "lime";
 
   startConfetti();
-
-  // Backend call to enroll user would go here
-  // sendEnrollment(userWallet);
 }
 
 // --- Confetti Effect ---
@@ -131,24 +125,23 @@ async function fetchCryptoPrices() {
     const cryptos = [
       { id: 'bitcoin', name: 'Bitcoin', symbol: 'BTC' },
       { id: 'ethereum', name: 'Ethereum', symbol: 'ETH' },
-      { id: 'binancecoin', name: 'Binance Coin', symbol: 'BNB' },
+      { id: 'binancecoin', name: 'Binance Coin', symbol: 'BNB' }
     ];
 
     cryptos.forEach(coin => {
+      const price = data[coin.id]?.usd || 'N/A';
       const card = document.createElement('div');
       card.className = 'crypto-card';
-
       card.innerHTML = `
         <h3>${coin.name} (${coin.symbol})</h3>
-        <p>Price: $${data[coin.id].usd.toLocaleString()}</p>
-        <p>Description: Placeholder description about ${coin.name}.</p>
+        <p>Price: $${price}</p>
+        <p>24h Change: N/A</p>
       `;
-
       cardsContainer.appendChild(card);
     });
-  } catch (error) {
-    cardsContainer.innerHTML = `<p style="color:#ff0044; font-weight:bold;">Failed to fetch crypto prices.</p>`;
+  } catch (err) {
+    console.error('Error fetching prices:', err);
   }
 }
 fetchCryptoPrices();
-setInterval(fetchCryptoPrices, 60000); // Refresh every 60 seconds
+setInterval(fetchCryptoPrices, 5 * 60 * 1000);
