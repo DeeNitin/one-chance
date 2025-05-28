@@ -8,13 +8,35 @@
 </head>
 <body>
   <div class="container">
-    <h1>🚀 One Chance - Become a Millionaire</h1>
-    <div class="message">
-      <h2>🌍 Let’s Change the World</h2>
-      <p>Imagine if 1 billion people sent just $1... One lucky person could walk away a millionaire every week. This is One Chance. A global experiment. Be part of it.</p>
+    <h1 class="fade-in">🚀 One Chance - Become a Millionaire</h1>
+
+    <div class="card-section">
+      <h2>🌟 Our Concept</h2>
+      <div class="scroll-cards">
+        <div class="card">
+          <img src="https://via.placeholder.com/150" alt="Concept 1" />
+          <p><strong>What is One Chance?</strong><br />A global crypto pool anyone can join.</p>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/150" alt="Concept 2" />
+          <p><strong>$1 From the World</strong><br />If a billion people send $1, someone gets rich.</p>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/150" alt="Concept 3" />
+          <p><strong>No Wallet Needed</strong><br />Just copy, send, and enroll.</p>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/150" alt="Concept 4" />
+          <p><strong>Winner Daily</strong><br />We announce 1 winner at 8PM UTC.</p>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/150" alt="Concept 5" />
+          <p><strong>Safe & Transparent</strong><br />No hidden fees. No middleman.</p>
+        </div>
+      </div>
     </div>
 
-    <div class="enroll-section">
+    <div class="enroll-section fade-in">
       <p><strong>Step 1:</strong> Send minimum 0.001 ETH/BNB/BTC/PI to:</p>
       <div class="wallet">
         <input id="walletAddress" readonly />
@@ -27,13 +49,10 @@
       <p><strong>Step 3:</strong> Click Enroll</p>
       <button onclick="enroll()">✅ Enroll in Pool</button>
 
-      <p>💬 Thousands have joined from 70+ countries. Be the next to win big.</p>
-      <p>🌟 Winners are picked randomly every day. No tricks. No wallet connection needed.</p>
-
       <p id="message"></p>
     </div>
 
-    <div class="result-section">
+    <div class="result-section fade-in">
       <h2 id="statusMessage">🎲 Waiting for today's result...</h2>
     </div>
   </div>
