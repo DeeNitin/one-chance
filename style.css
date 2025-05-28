@@ -1,238 +1,267 @@
-/* Base styles */
+/* Global box-sizing for predictable sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Root and basic body styling */
+:root {
+  --pink: #e75480;
+  --light-pink: #ffc0cb;
+  --white: #ffffff;
+  --shadow-pink: #e75480aa;
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #fffafc;
-  color: #2c2c2c;
-  overflow-x: hidden;
+  background: #fffefc;
+  color: var(--pink);
+  text-align: center;
   min-height: 100vh;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 25px 15px;
+  user-select: none;
+  overflow-x: hidden;
 }
 
-/* Container */
+/* Main container */
 .container {
-  max-width: 400px;
-  margin: 30px auto;
-  padding: 0 20px 60px;
-}
-
-/* Header */
-header h1 {
-  font-weight: 900;
-  font-size: 2.8rem;
-  color: #e75480;
-  margin-bottom: 5px;
-  user-select: none;
-  text-align: center;
-  letter-spacing: 1.5px;
-}
-
-header p {
-  font-weight: 600;
-  color: #555;
-  text-align: center;
-  margin-bottom: 40px;
-  font-style: italic;
-}
-
-/* Card style */
-.card {
-  background: white;
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 10px 20px rgba(231, 84, 128, 0.15);
-  margin-bottom: 30px;
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 15px 30px rgba(231, 84, 128, 0.25);
-}
-
-/* Wallet copy */
-.wallet-copy {
-  display: flex;
-  gap: 10px;
-  margin: 15px 0 25px;
-}
-
-.wallet-copy input {
-  flex-grow: 1;
-  padding: 12px 15px;
-  border: 2px solid #e75480;
-  border-radius: 14px;
-  font-weight: 600;
-  color: #e75480;
-  user-select: all;
-  font-size: 0.9rem;
+  max-width: 460px;
   background: #fff0f5;
-}
-
-.wallet-copy button {
-  background: #e75480;
-  border: none;
-  color: white;
-  font-weight: 700;
-  padding: 12px 20px;
-  border-radius: 14px;
-  cursor: pointer;
-  box-shadow: 0 6px 12px #e75480aa;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.wallet-copy button:hover {
-  background: #cc3b69;
-  box-shadow: 0 8px 18px #cc3b69cc;
-}
-
-/* Input */
-#userWallet {
-  width: 100%;
-  padding: 14px 18px;
-  border-radius: 14px;
-  border: 2px solid #e75480;
-  font-weight: 600;
-  font-size: 1rem;
-  background: #fff0f5;
-  margin-bottom: 25px;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-#userWallet:focus {
-  border-color: #cc3b69;
-}
-
-/* Enroll button */
-.btn-enroll {
-  width: 100%;
-  padding: 15px;
-  background: #e75480;
-  border: none;
-  border-radius: 14px;
-  color: white;
-  font-weight: 900;
-  font-size: 1.1rem;
-  cursor: pointer;
-  box-shadow: 0 8px 20px #e75480bb;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn-enroll:hover {
-  background: #cc3b69;
-  box-shadow: 0 10px 30px #cc3b69cc;
-}
-
-/* Message */
-.message {
-  font-weight: 700;
-  margin-top: 15px;
-  text-align: center;
-  min-height: 24px;
-}
-
-/* Info cards container */
-.info-cards-container h2 {
-  color: #e75480;
-  font-weight: 900;
-  text-align: center;
-  margin-bottom: 15px;
-  letter-spacing: 1.2px;
-}
-
-/* Scrollable cards */
-.cards-scroll {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-  scrollbar-width: thin;
-  scrollbar-color: #e75480 #ffe6f0;
-}
-
-.cards-scroll::-webkit-scrollbar {
-  height: 8px;
-}
-
-.cards-scroll::-webkit-scrollbar-thumb {
-  background: #e75480;
-  border-radius: 8px;
-}
-
-.info-card {
-  background: #fff0f5;
-  min-width: 220px;
-  border-radius: 18px;
-  box-shadow: 0 8px 20px rgba(231, 84, 128, 0.25);
-  text-align: center;
-  padding: 15px;
-  user-select: none;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
-
-.info-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 30px rgba(231, 84, 128, 0.45);
-}
-
-.info-card img {
-  width: 100%;
-  border-radius: 14px;
-  margin-bottom: 12px;
-  box-shadow: 0 6px 14px rgba(231, 84, 128, 0.35);
-}
-
-.info-card p {
-  font-weight: 700;
-  color: #b44e6b;
-  font-size: 1rem;
-}
-
-/* Result Section */
-.result-section h2 {
-  text-align: center;
-  font-weight: 800;
-  color: #b44e6b;
-  font-size: 1.3rem;
-  user-select: none;
-}
-
-/* Floating spirits animation container */
-.floating-spirits {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 5;
+  border-radius: 24px;
+  box-shadow: 0 0 30px var(--shadow-pink);
+  padding: 28px 24px 36px 24px;
+  box-sizing: border-box;
+  position: relative;
   overflow: hidden;
 }
 
-/* Individual spirit */
-.spirit {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(231,84,128,0.8), transparent 70%);
-  filter: drop-shadow(0 0 6px rgba(231, 84, 128, 0.6));
-  animation-name: floatUp;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  opacity: 0.7;
+/* Heading */
+h1 {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-weight: 900;
+  color: var(--pink);
+  font-size: 2.6rem;
+  margin-bottom: 5px;
+  user-select: text;
+  text-shadow:
+    1px 1px 0 #ffb6c1,
+    2px 2px 4px #cc6383;
 }
 
-@keyframes floatUp {
-  0% {
-    transform: translateY(100%) scale(0.5);
-    opacity: 0;
+/* Sub text */
+p {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  color: var(--pink);
+  user-select: text;
+  text-shadow: 0 0 6px #ffd1db;
+}
+
+/* Wallet copy container */
+.wallet-copy {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on narrow screens */
+  gap: 10px;
+  margin: 15px 0 25px;
+  justify-content: center;
+}
+
+/* Wallet input */
+.wallet-copy input {
+  flex: 1 1 60%; /* grow, shrink, basis */
+  min-width: 180px;
+  max-width: 100%;
+  padding: 12px 15px;
+  border: 2px solid var(--pink);
+  border-radius: 14px;
+  font-weight: 600;
+  color: var(--pink);
+  user-select: all;
+  font-size: 0.9rem;
+  background: #fff0f5;
+  box-shadow:
+    inset 0 0 6px #f9b0c3,
+    0 0 4px var(--pink);
+  transition: border-color 0.3s ease;
+}
+
+.wallet-copy input:focus {
+  border-color: #ff85a2;
+  outline: none;
+  box-shadow:
+    0 0 10px #ff85a2,
+    inset 0 0 8px #ffbad1;
+}
+
+/* Copy button */
+.wallet-copy button {
+  flex: 1 1 35%;
+  min-width: 100px;
+  max-width: 100%;
+  background: var(--pink);
+  border: none;
+  color: white;
+  font-weight: 700;
+  padding: 12px 15px;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px var(--shadow-pink);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  font-size: 0.95rem;
+}
+
+.wallet-copy button:hover {
+  background-color: #ff5a8a;
+  box-shadow: 0 8px 16px #ff5a8aaa;
+}
+
+/* Inputs outside wallet-copy */
+.enroll-section input#userWallet {
+  width: 100%;
+  padding: 14px 18px;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 18px;
+  border: 2px solid var(--pink);
+  background: #fff0f5;
+  color: var(--pink);
+  box-shadow:
+    inset 0 0 6px #f9b0c3,
+    0 0 5px var(--pink);
+  transition: border-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.enroll-section input#userWallet:focus {
+  border-color: #ff85a2;
+  outline: none;
+  box-shadow:
+    0 0 10px #ff85a2,
+    inset 0 0 8px #ffbad1;
+}
+
+/* Enroll button */
+.enroll-section button {
+  background: var(--pink);
+  color: white;
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px var(--shadow-pink);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 24px;
+}
+
+.enroll-section button:hover {
+  background-color: #ff5a8a;
+  box-shadow: 0 10px 24px #ff5a8aaa;
+}
+
+/* Message text */
+#message {
+  font-weight: 700;
+  font-size: 1rem;
+  min-height: 28px;
+  user-select: text;
+  margin-bottom: 20px;
+}
+
+/* Result section */
+.result-section {
+  margin-top: 20px;
+  user-select: text;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--pink);
+  text-shadow: 0 0 8px #f8a1bb;
+}
+
+/* Scrollable cards container */
+.scroll-cards {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding-bottom: 12px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 30px;
+  user-select: none;
+}
+
+/* Hide scrollbar for most browsers */
+.scroll-cards::-webkit-scrollbar {
+  display: none;
+}
+.scroll-cards {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Individual card style */
+.card {
+  flex: 0 0 280px;
+  background: #fff5fb;
+  border-radius: 20px;
+  box-shadow:
+    0 6px 18px #ff8fb38a,
+    inset 0 0 10px #ffd0db;
+  padding: 18px;
+  color: var(--pink);
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: text;
+  transition: transform 0.25s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.07);
+  box-shadow:
+    0 10px 25px #ff7093cc,
+    inset 0 0 14px #ff8ba7;
+}
+
+/* Card images placeholder */
+.card img {
+  width: 100%;
+  height: 140px;
+  border-radius: 18px;
+  object-fit: cover;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 4px 6px #ff85a2aa);
+  user-select: none;
+}
+
+/* Card description */
+.card .desc {
+  text-align: center;
+  line-height: 1.25;
+  user-select: text;
+  color: #d43768;
+}
+
+/* Responsive tweaks */
+@media (max-width: 400px) {
+  .wallet-copy input,
+  .wallet-copy button {
+    flex-basis: 100%;
   }
-  50% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(-10%) scale(1);
-    opacity: 0;
+  
+  .card {
+    flex: 0 0 240px;
   }
 }
