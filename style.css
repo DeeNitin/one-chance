@@ -1,112 +1,238 @@
-/* Bright white background */
+/* Base styles */
 body {
-  background: #fff;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: #333;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fffafc;
+  color: #2c2c2c;
   overflow-x: hidden;
-  position: relative;
   min-height: 100vh;
+  position: relative;
 }
 
-/* Sakura petals container styles */
-#sakura-container {
+/* Container */
+.container {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 0 20px 60px;
+}
+
+/* Header */
+header h1 {
+  font-weight: 900;
+  font-size: 2.8rem;
+  color: #e75480;
+  margin-bottom: 5px;
+  user-select: none;
+  text-align: center;
+  letter-spacing: 1.5px;
+}
+
+header p {
+  font-weight: 600;
+  color: #555;
+  text-align: center;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+/* Card style */
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 10px 20px rgba(231, 84, 128, 0.15);
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 15px 30px rgba(231, 84, 128, 0.25);
+}
+
+/* Wallet copy */
+.wallet-copy {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0 25px;
+}
+
+.wallet-copy input {
+  flex-grow: 1;
+  padding: 12px 15px;
+  border: 2px solid #e75480;
+  border-radius: 14px;
+  font-weight: 600;
+  color: #e75480;
+  user-select: all;
+  font-size: 0.9rem;
+  background: #fff0f5;
+}
+
+.wallet-copy button {
+  background: #e75480;
+  border: none;
+  color: white;
+  font-weight: 700;
+  padding: 12px 20px;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px #e75480aa;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wallet-copy button:hover {
+  background: #cc3b69;
+  box-shadow: 0 8px 18px #cc3b69cc;
+}
+
+/* Input */
+#userWallet {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 2px solid #e75480;
+  font-weight: 600;
+  font-size: 1rem;
+  background: #fff0f5;
+  margin-bottom: 25px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+#userWallet:focus {
+  border-color: #cc3b69;
+}
+
+/* Enroll button */
+.btn-enroll {
+  width: 100%;
+  padding: 15px;
+  background: #e75480;
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-weight: 900;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 8px 20px #e75480bb;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-enroll:hover {
+  background: #cc3b69;
+  box-shadow: 0 10px 30px #cc3b69cc;
+}
+
+/* Message */
+.message {
+  font-weight: 700;
+  margin-top: 15px;
+  text-align: center;
+  min-height: 24px;
+}
+
+/* Info cards container */
+.info-cards-container h2 {
+  color: #e75480;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 15px;
+  letter-spacing: 1.2px;
+}
+
+/* Scrollable cards */
+.cards-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #e75480 #ffe6f0;
+}
+
+.cards-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.cards-scroll::-webkit-scrollbar-thumb {
+  background: #e75480;
+  border-radius: 8px;
+}
+
+.info-card {
+  background: #fff0f5;
+  min-width: 220px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(231, 84, 128, 0.25);
+  text-align: center;
+  padding: 15px;
+  user-select: none;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(231, 84, 128, 0.45);
+}
+
+.info-card img {
+  width: 100%;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 14px rgba(231, 84, 128, 0.35);
+}
+
+.info-card p {
+  font-weight: 700;
+  color: #b44e6b;
+  font-size: 1rem;
+}
+
+/* Result Section */
+.result-section h2 {
+  text-align: center;
+  font-weight: 800;
+  color: #b44e6b;
+  font-size: 1.3rem;
+  user-select: none;
+}
+
+/* Floating spirits animation container */
+.floating-spirits {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   pointer-events: none;
+  z-index: 5;
   overflow: hidden;
-  z-index: 10;
 }
 
-/* Sakura petal style */
-.sakura-petal {
+/* Individual spirit */
+.spirit {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  background: url('https://i.imgur.com/YH0YspL.png') no-repeat center/contain;
-  opacity: 0.8;
-  animation: fall linear forwards;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(231,84,128,0.8), transparent 70%);
+  filter: drop-shadow(0 0 6px rgba(231, 84, 128, 0.6));
+  animation-name: floatUp;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  opacity: 0.7;
 }
 
-/* Animation for falling petals */
-@keyframes fall {
+@keyframes floatUp {
   0% {
-    transform: translateY(-30px) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
+    transform: translateY(100%) scale(0.5);
     opacity: 0;
   }
-}
-
-/* Card styles with bounce + glow hover */
-.enroll-section, .result-section {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 360px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.enroll-section:hover, .result-section:hover {
-  animation: bounce 0.6s;
-  box-shadow: 0 15px 35px rgba(255, 105, 180, 0.7);
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-  }
   50% {
-    transform: translateY(-10px) scale(1.05);
+    opacity: 0.8;
   }
-}
-
-/* Buttons with pastel pink glow on hover */
-button {
-  background: #ff6f91;
-  border: none;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 25px;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 5px 15px #ff6f91aa;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-button:hover {
-  box-shadow: 0 10px 25px #ff6f91dd;
-  transform: scale(1.05);
-}
-
-/* Input fields with soft border and glow */
-input#walletAddress, input#userWallet {
-  border: 2px solid #ffb6c1;
-  border-radius: 10px;
-  padding: 12px 15px;
-  width: 100%;
-  margin-bottom: 15px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-input#walletAddress:focus, input#userWallet:focus {
-  border-color: #ff69b4;
-  box-shadow: 0 0 8px #ff69b4aa;
-  outline: none;
-}
-
-/* Header with anime-style font + pastel pink */
-h1 {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  color: #ff69b4;
-  text-shadow: 0 0 8px #ff69b4aa;
-  margin-bottom: 10px;
-  user-select: none;
+  100% {
+    transform: translateY(-10%) scale(1);
+    opacity: 0;
+  }
 }

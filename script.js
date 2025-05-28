@@ -1,13 +1,8 @@
-// Load sound effects
-const copySound = new Audio('copy.mp3');
-const enrollSound = new Audio('enroll.mp3');
-
 function copyWallet() {
   const walletInput = document.getElementById("walletAddress");
   walletInput.select();
   walletInput.setSelectionRange(0, 99999);
   navigator.clipboard.writeText(walletInput.value);
-  copySound.play();
   alert("Wallet address copied!");
 }
 
@@ -17,45 +12,54 @@ function enroll() {
 
   if (!userWallet || userWallet.length < 10) {
     message.innerText = "Please enter a valid wallet address.";
-    message.style.color = "red";
+    message.style.color = "#d9534f"; // red
     return;
   }
 
   message.innerText = "🎉 You are enrolled! Come back at 8PM UTC to see if you won!";
-  message.style.color = "lime";
-  enrollSound.play();
+  message.style.color = "#5cb85c"; // green
+
   launchConfetti();
 }
 
 // Confetti animation
 function launchConfetti() {
   confetti({
-    particleCount: 100,
-    spread: 70,
+    particleCount: 120,
+    spread: 80,
     origin: { y: 0.6 },
-    colors: ['#ff66a3', '#a3bfff', '#ffd1dc', '#cceeff']
+    colors: ['#e75480', '#f8a1c4', '#fce4ec']
   });
 }
 
-// Sakura petals animation generator
-const sakuraContainer = document.getElementById('sakura-container');
+// Create floating spirits animation
+const spiritContainer = document.querySelector('.floating-spirits');
 
-function createPetal() {
-  const petal = document.createElement('div');
-  petal.classList.add('sakura-petal');
-  petal.style.left = Math.random() * 100 + 'vw';
-  petal.style.animationDuration = (5 + Math.random() * 5) + 's';
-  petal.style.animationDelay = Math.random() * 10 + 's';
-  sakuraContainer.appendChild(petal);
+function createSpirit() {
+  const spirit = document.createElement('div');
+  spirit.classList.add('spirit');
 
-  // Remove petal after animation
-  setTimeout(() => {
-    sakuraContainer.removeChild(petal);
-    createPetal(); // Create new one to keep flow
-  }, (parseFloat(petal.style.animationDuration) + parseFloat(petal.style.animationDelay)) * 1000);
+  // Random size 8-16 px
+  const size = 8 + Math.random() * 8;
+  spirit.style.width = size + 'px';
+  spirit.style.height = size + 'px';
+
+  // Random horizontal position across viewport
+  spirit.style.left = (Math.random() * 100) + 'vw';
+
+  // Random animation duration between 6 and 14 seconds
+  spirit.style.animationDuration = (6 + Math.random() * 8) + 's';
+
+  spiritContainer.appendChild(spirit);
+
+  // Remove and re-create after animation ends to loop spirits
+  spirit.addEventListener('animationend', () => {
+    spirit.remove();
+    createSpirit();
+  });
 }
 
-// Create initial petals
-for(let i = 0; i < 30; i++) {
-  createPetal();
+// Start with 20 spirits floating
+for (let i = 0; i < 20; i++) {
+  createSpirit();
 }
