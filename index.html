@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One Chance</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 One Chance - Become a Millionaire</h1>
+    <p>Send a tiny amount of crypto to get a chance to win it all.</p>
+
+    <div class="enroll-section">
+      <p><strong>Step 1:</strong> Send minimum 0.001 ETH/BNB/BTC/PI to:</p>
+      <div class="wallet">
+        <input id="walletAddress" value="0xYourWalletAddressHere" readonly />
+        <button onclick="copyWallet()">📋 Copy Address</button>
+      </div>
+
+      <p><strong>Step 2:</strong> Enter your wallet address:</p>
+      <input id="userWallet" placeholder="Enter your wallet..." />
+
+      <p><strong>Step 3:</strong> Click Enroll</p>
+      <button onclick="enroll()">✅ Enroll in Pool</button>
+
+      <p id="message"></p>
+    </div>
+
+    <div class="result-section">
+      <h2 id="statusMessage">🎲 Waiting for today's result...</h2>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
