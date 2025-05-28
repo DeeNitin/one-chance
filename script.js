@@ -5,7 +5,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+const letters = 'IAMRICHIAMRICHIAMRICHDEEKSHANITIN';
 const fontSize = 16;
 const columns = Math.floor(canvas.width / fontSize);
 const drops = Array(columns).fill(1);
@@ -36,7 +36,7 @@ window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
-  
+
 // --- Copy Wallet Address ---
 function copyWallet() {
   const walletInput = document.getElementById("walletAddress");
@@ -136,13 +136,28 @@ async function fetchCryptoPrices() {
     ];
 
     cryptos.forEach(coin => {
+      let description = '';
+      switch (coin.id) {
+        case 'bitcoin':
+          description = "Take one chance to win big. Your entry fuels the pool—no complex rules, just pure excitement.";
+          break;
+        case 'ethereum':
+          description = "Join a fair game where everyone’s chance matters. Simple, transparent, and thrilling.";
+          break;
+        case 'binancecoin':
+          description = "Put your luck to the test in a pool designed for winners. Play smart, win smarter.";
+          break;
+        default:
+          description = "One chance, endless possibilities. Enroll and see if you beat the odds.";
+      }
+
       const card = document.createElement('div');
       card.className = 'crypto-card';
 
       card.innerHTML = `
         <h3>${coin.name} (${coin.symbol})</h3>
         <p>Price: $${data[coin.id].usd.toLocaleString()}</p>
-        <p>Description: Placeholder description about ${coin.name}.</p>
+        <p>${description}</p>
       `;
 
       cardsContainer.appendChild(card);
@@ -153,6 +168,6 @@ async function fetchCryptoPrices() {
 }
 fetchCryptoPrices();
 setInterval(fetchCryptoPrices, 60000); // Refresh every 60 seconds
+
 document.getElementById('copyBtn').addEventListener('click', copyWallet);
 document.getElementById('enrollBtn').addEventListener('click', enroll);
-
