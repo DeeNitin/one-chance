@@ -2,8 +2,9 @@ function copyWallet() {
   const walletInput = document.getElementById("walletAddress");
   walletInput.select();
   walletInput.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(walletInput.value);
-  alert("Wallet address copied!");
+  navigator.clipboard.writeText(walletInput.value).then(() => {
+    alert("Wallet address copied!");
+  });
 }
 
 function enroll() {
@@ -19,5 +20,15 @@ function enroll() {
   message.innerText = "🎉 You are enrolled! Come back at 8PM UTC to see if you won!";
   message.style.color = "lime";
 
-  // This will eventually send the userWallet to your backend.
+  launchConfetti();
+
+  // TODO: Send userWallet to backend for winner selection in the future
+}
+
+function launchConfetti() {
+  confetti({
+    particleCount: 150,
+    spread: 80,
+    origin: { y: 0.6 }
+  });
 }
