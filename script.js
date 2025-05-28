@@ -153,3 +153,6 @@ async function fetchCryptoPrices() {
 }
 fetchCryptoPrices();
 setInterval(fetchCryptoPrices, 60000); // Refresh every 60 seconds
+document.getElementById('copyBtn').addEventListener('click', copyWallet);
+document.getElementById('enrollBtn').addEventListener('click', enroll);
+
