@@ -57,5 +57,56 @@
 
   <script src="confetti.js"></script>
   <script src="script.js"></script>
+
+  <!-- Spirit Particle Canvas -->
+<canvas id="spiritCanvas"></canvas>
+
+<script>
+// Floating spirits animation
+const canvas = document.getElementById('spiritCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+canvas.style.position = 'fixed';
+canvas.style.top = '0';
+canvas.style.left = '0';
+canvas.style.zIndex = '-1';
+canvas.style.pointerEvents = 'none';
+canvas.style.opacity = '0.4';
+
+let spirits = [];
+
+function createSpirit() {
+  return {
+    x: Math.random() * canvas.width,
+    y: canvas.height + 10,
+    size: Math.random() * 6 + 2,
+    speed: Math.random() * 1 + 0.5
+  };
+}
+
+for (let i = 0; i < 50; i++) {
+  spirits.push(createSpirit());
+}
+
+function drawSpirits() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let spirit of spirits) {
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(0,0,0,0.3)';
+    ctx.arc(spirit.x, spirit.y, spirit.size, 0, Math.PI * 2);
+    ctx.fill();
+    spirit.y -= spirit.speed;
+    if (spirit.y < -10) {
+      Object.assign(spirit, createSpirit());
+      spirit.y = canvas.height + 10;
+    }
+  }
+  requestAnimationFrame(drawSpirits);
+}
+
+drawSpirits();
+</script>
+
 </body>
 </html>
