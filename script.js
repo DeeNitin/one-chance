@@ -1,3 +1,8 @@
+// Set wallet address securely via JavaScript
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("walletAddress").value = "0x6f7BB151D8fF02CccdF183917B8aDD81215d1266";
+});
+
 function copyWallet() {
   const walletInput = document.getElementById("walletAddress");
   walletInput.select();
@@ -10,9 +15,10 @@ function copyWallet() {
 function enroll() {
   const userWallet = document.getElementById("userWallet").value.trim();
   const message = document.getElementById("message");
+  const walletPattern = /^0x[a-fA-F0-9]{40}$/;
 
-  if (!userWallet || userWallet.length < 10) {
-    message.innerText = "Please enter a valid wallet address.";
+  if (!walletPattern.test(userWallet)) {
+    message.innerText = "Please enter a valid wallet address (starts with 0x...).";
     message.style.color = "red";
     return;
   }
@@ -22,7 +28,7 @@ function enroll() {
 
   launchConfetti();
 
-  // TODO: Send userWallet to backend for winner selection in the future
+  // TODO: Hook this to a backend later to record entry
 }
 
 function launchConfetti() {
