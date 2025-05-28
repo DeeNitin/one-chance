@@ -3,49 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>One Chance - Crypto Pool</title>
+  <title>One Chance - Cyberpunk Crypto Pool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+  <canvas id="digitalRain"></canvas>
+
+  <div class="app-container">
     <header>
-      <h1>🚀 One Chance - Make Millions Possible</h1>
-      <p class="tagline">Send a tiny crypto amount, join the pool, become a millionaire!</p>
+      <h1>ONE CHANCE</h1>
+      <p class="tagline">Send crypto. Beat the odds. Get rich or glitch trying.</p>
     </header>
 
-    <section class="enroll-section">
-      <p><strong>Step 1:</strong> Send at least <span id="minDonation">0.001</span> ETH / BNB / BTC / PI to this address:</p>
-      <div class="wallet-container">
-        <input id="walletAddress" value="0x6f7BB151D8fF02CccdF183917B8aDD81215d1266" readonly />
-        <button id="copyBtn" aria-label="Copy wallet address">📋 Copy Address</button>
+    <section class="wallet-section">
+      <label for="walletAddress" class="label-neon">Send Minimum to Wallet:</label>
+      <div class="wallet-copy-wrapper">
+        <input id="walletAddress" readonly value="0x6f7BB151D8fF02CccdF183917B8aDD81215d1266" />
+        <button id="copyBtn" class="btn-neon">COPY</button>
       </div>
-
-      <p><strong>Step 2:</strong> Enter your wallet address:</p>
-      <input id="userWallet" placeholder="Paste your wallet address here" />
-
-      <button id="enrollBtn" aria-label="Enroll in daily pool">✅ Enroll Now</button>
-
-      <p id="message" aria-live="polite"></p>
     </section>
 
-    <section class="status-section">
-      <h2 id="statusMessage" aria-live="polite">🎲 Waiting for today's winner announcement...</h2>
+    <section class="enroll-section">
+      <label for="userWallet" class="label-neon">Enter Your Wallet Address</label>
+      <input id="userWallet" placeholder="0x..." autocomplete="off" spellcheck="false" />
+      <button id="enrollBtn" class="btn-neon enroll-btn">ENROLL IN POOL</button>
+      <p id="message" class="message-log"></p>
     </section>
 
     <section class="cards-section">
-      <h3>Live Crypto Prices & Concept</h3>
-      <div id="cardsContainer" class="cards-container" aria-label="Scrollable crypto prices and concept cards">
-        <!-- Cards inserted by JS -->
-      </div>
+      <h2>Supported Cryptos & Min Donation</h2>
+      <div id="cardsContainer" class="cards-container"></div>
     </section>
 
-    <section class="quotes-section" aria-live="polite" aria-atomic="true">
-      <blockquote id="quoteDisplay"></blockquote>
+    <section class="status-console">
+      <h3>Status Console</h3>
+      <pre id="statusMessage" class="console-output">⌛ Waiting for daily winner announcement...</pre>
     </section>
 
+    <section class="quotes-section">
+      <p id="quoteDisplay" class="quote-neon"></p>
+    </section>
   </div>
-
-  <canvas id="confettiCanvas"></canvas>
 
   <script src="script.js"></script>
 </body>
