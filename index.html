@@ -5,54 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>One Chance</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <h1 class="fade-in">🚀 One Chance - Become a Millionaire</h1>
+    <h1>🌸 One Chance - Become a Millionaire</h1>
+    <p class="intro">Inspired by the spirit of giving 🌈</p>
 
     <div class="card-section">
-      <h2>🌟 Our Concept</h2>
+      <h2>✨ How It Works</h2>
       <div class="scroll-cards">
         <div class="card">
-          <img src="https://via.placeholder.com/150" alt="Concept 1" />
-          <p><strong>What is One Chance?</strong><br />A global crypto pool anyone can join.</p>
+          <img src="https://via.placeholder.com/200x120?text=Bathhouse" alt="Bathhouse" />
+          <p><strong>What is One Chance?</strong><br />A magical crypto pool to change a life daily.</p>
         </div>
         <div class="card">
-          <img src="https://via.placeholder.com/150" alt="Concept 2" />
-          <p><strong>$1 From the World</strong><br />If a billion people send $1, someone gets rich.</p>
+          <img src="https://via.placeholder.com/200x120?text=Soot+Sprite" alt="Sprite" />
+          <p><strong>Just $1</strong><br />Millions giving a little can create real magic.</p>
         </div>
         <div class="card">
-          <img src="https://via.placeholder.com/150" alt="Concept 3" />
-          <p><strong>No Wallet Needed</strong><br />Just copy, send, and enroll.</p>
+          <img src="https://via.placeholder.com/200x120?text=Forest" alt="Forest" />
+          <p><strong>No Wallet App</strong><br />Just copy the address, send, and enter.</p>
         </div>
         <div class="card">
-          <img src="https://via.placeholder.com/150" alt="Concept 4" />
-          <p><strong>Winner Daily</strong><br />We announce 1 winner at 8PM UTC.</p>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/150" alt="Concept 5" />
-          <p><strong>Safe & Transparent</strong><br />No hidden fees. No middleman.</p>
+          <img src="https://via.placeholder.com/200x120?text=Sky" alt="Sky" />
+          <p><strong>Daily Winners</strong><br />Announced at 8PM UTC daily.</p>
         </div>
       </div>
     </div>
 
-    <div class="enroll-section fade-in">
-      <p><strong>Step 1:</strong> Send minimum 0.001 ETH/BNB/BTC/PI to:</p>
+    <div class="enroll-section">
+      <h3>🪙 Step 1: Send a tiny donation to:</h3>
       <div class="wallet">
-        <input id="walletAddress" readonly />
+        <input id="walletAddress" value="0x6f7BB151D8fF02CccdF183917B8aDD81215d1266" readonly />
         <button onclick="copyWallet()">📋 Copy Address</button>
       </div>
 
-      <p><strong>Step 2:</strong> Enter your wallet address:</p>
-      <input id="userWallet" placeholder="Enter your wallet..." />
+      <h3>💼 Step 2: Enter your wallet address</h3>
+      <input id="userWallet" placeholder="e.g. 0x..." />
 
-      <p><strong>Step 3:</strong> Click Enroll</p>
-      <button onclick="enroll()">✅ Enroll in Pool</button>
+      <h3>✅ Step 3: Tap to Enroll</h3>
+      <button onclick="enroll()">🌠 Enroll in Pool</button>
 
       <p id="message"></p>
     </div>
 
-    <div class="result-section fade-in">
+    <div class="result-section">
       <h2 id="statusMessage">🎲 Waiting for today's result...</h2>
     </div>
   </div>
