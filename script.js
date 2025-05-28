@@ -1,175 +1,72 @@
-// Neon cyberpunk futuristic UI script for One Chance
-
-// Digital Rain Effect Setup
+// --- Digital Rain Canvas Effect (Toned down brightness) ---
 const canvas = document.getElementById('digitalRain');
 const ctx = canvas.getContext('2d');
-let width, height;
-let columns;
-let drops = [];
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 const fontSize = 16;
-const letters = '0123456789ABCDEF';
+const columns = Math.floor(canvas.width / fontSize);
+const drops = Array(columns).fill(1);
 
-function setupCanvas() {
-  width = window.innerWidth;
-  height = window.innerHeight;
-  canvas.width = width;
-  canvas.height = height;
-  columns = Math.floor(width / fontSize);
-  drops = [];
-  for (let x = 0; x < columns; x++) {
-    drops[x] = Math.random() * height;
-  }
-}
+function draw() {
+  // Slightly transparent black background to create trail effect
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-function drawDigitalRain() {
-  ctx.fillStyle = 'rgba(0, 255, 153, 0.15)';
-  ctx.fillRect(0, 0, width, height);
-
-  ctx.fillStyle = '#00ff99';
-  ctx.font = `${fontSize}px Share Tech Mono`;
+  ctx.fillStyle = 'rgba(0, 255, 153, 0.15)'; // <-- Reduced opacity here to tone down brightness
+  ctx.font = fontSize + 'px monospace';
 
   for (let i = 0; i < drops.length; i++) {
     const text = letters.charAt(Math.floor(Math.random() * letters.length));
     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-    if (drops[i] * fontSize > height && Math.random() > 0.975) {
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
       drops[i] = 0;
     }
-    drops[i] += 0.8;
+
+    drops[i]++;
   }
 }
 
-setupCanvas();
-setInterval(drawDigitalRain, 33);
-window.addEventListener('resize', setupCanvas);
+setInterval(draw, 40);
 
-// UI Elements
-const walletAddressInput = document.getElementById('walletAddress');
-const copyBtn = document.getElementById('copyBtn');
-const userWalletInput = document.getElementById('userWallet');
-const enrollBtn = document.getElementById('enrollBtn');
-const messageEl = document.getElementById('message');
-const cardsContainer = document.getElementById('cardsContainer');
-const statusMessageEl = document.getElementById('statusMessage');
-const quoteDisplay = document.getElementById('quoteDisplay');
-
-// Enrollment wallets set
-const enrolledWallets = new Set();
-
-// --- COPY WALLET ---
-copyBtn.addEventListener('click', () => {
-  walletAddressInput.select();
-  walletAddressInput.setSelectionRange(0, 99999);
-  try {
-    const successful = document.execCommand('copy');
-    if (successful) {
-      messageEl.style.color = '#00ff99';
-      messageEl.textContent = 'Wallet address copied!';
-    } else {
-      messageEl.style.color = '#ff4444';
-      messageEl.textContent = 'Copy failed. Please copy manually.';
-    }
-  } catch {
-    messageEl.style.color = '#ff4444';
-    messageEl.textContent = 'Copy not supported on this browser.';
-  }
-  setTimeout(() => (messageEl.textContent = ''), 3500);
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 });
+  
+// --- Rest of your script.js below ---
 
-// --- ENROLL ---
-enrollBtn.addEventListener('click', () => {
-  const wallet = userWalletInput.value.trim();
-  if (!wallet || wallet.length < 10) {
-    messageEl.style.color = '#ff4444';
-    messageEl.textContent = 'Enter a valid wallet address.';
+// Copy Wallet Address
+function copyWallet() {
+  const walletInput = document.getElementById("walletAddress");
+  walletInput.select();
+  walletInput.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(walletInput.value);
+  alert("Wallet address copied!");
+}
+
+// Enroll user
+function enroll() {
+  const userWallet = document.getElementById("userWallet").value.trim();
+  const message = document.getElementById("message");
+
+  if (!userWallet || userWallet.length < 10) {
+    message.innerText = "Please enter a valid wallet address.";
+    message.style.color = "red";
     return;
   }
-  if (enrolledWallets.has(wallet)) {
-    messageEl.style.color = '#ffaa00';
-    messageEl.textContent = 'You are already enrolled for today!';
-    return;
-  }
 
-  // Enrollment success simulation
-  enrolledWallets.add(wallet);
-  messageEl.style.color = '#00ff99';
-  messageEl.textContent = 'Enrollment successful! 🎉';
-  userWalletInput.value = '';
+  message.innerText = "🎉 You are enrolled! Come back at 8PM UTC to see if you won!";
+  message.style.color = "lime";
 
-  // Log enrollment in status console
-  addToConsole(`Enrolled wallet: ${wallet}`);
-
-  // Start confetti effect
   startConfetti();
 
-  // Stop confetti after 3.5 seconds
-  setTimeout(stopConfetti, 3500);
-});
-
-// --- CONSOLE LOGGING ---
-function addToConsole(text) {
-  statusMessageEl.textContent = `[${new Date().toLocaleTimeString()}] ${text}\n` + statusMessageEl.textContent;
-  if (statusMessageEl.textContent.length > 600) {
-    statusMessageEl.textContent = statusMessageEl.textContent.slice(0, 600);
-  }
+  // Backend call to enroll user would go here
+  // sendEnrollment(userWallet);
 }
-
-// --- STATUS MESSAGE UPDATE ---
-function updateStatus() {
-  const now = new Date();
-  const announcementHourUTC = 20;
-  let announcementTime = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), announcementHourUTC));
-
-  if (now > announcementTime) {
-    statusMessageEl.textContent = `[${now.toLocaleTimeString()}] 🎉 Today's winner has been announced! Check back tomorrow.`;
-    statusMessageEl.style.color = '#ff0055';
-  } else {
-    const diff = announcementTime - now;
-    const hours = Math.floor(diff / 1000 / 60 / 60);
-    const minutes = Math.floor((diff / 1000 / 60) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-    statusMessageEl.textContent = `[${now.toLocaleTimeString()}] 🎲 Waiting for winner announcement in ${hours}h ${minutes}m ${seconds}s...`;
-    statusMessageEl.style.color = '#00ff99';
-  }
-}
-setInterval(updateStatus, 1000);
-updateStatus();
-
-// --- CRYPTO DATA FETCH & CARDS ---
-async function fetchCryptoPrices() {
-  try {
-    const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,pixar&vs_currencies=usd');
-    const data = await response.json();
-
-    // Clear cards
-    cardsContainer.innerHTML = '';
-
-    const cryptos = [
-      { id: 'bitcoin', name: 'Bitcoin', symbol: 'BTC', min: '0.0005 BTC', img: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=025' },
-      { id: 'ethereum', name: 'Ethereum', symbol: 'ETH', min: '0.01 ETH', img: 'https://cryptologos.cc/logos/ethereum-eth-logo.png?v=025' },
-      { id: 'binancecoin', name: 'Binance Coin', symbol: 'BNB', min: '0.01 BNB', img: 'https://cryptologos.cc/logos/binance-coin-bnb-logo.png?v=025' }
-    ];
-
-    cryptos.forEach(crypto => {
-      if (!data[crypto.id]) return;
-      const priceUSD = data[crypto.id].usd.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-
-      const card = document.createElement('div');
-      card.classList.add('card');
-      card.innerHTML = `
-        <img src="${crypto.img}" alt="${crypto.name} Logo" />
-        <h4>${crypto.name} (${crypto.symbol.toUpperCase()})</h4>
-        <p>Current Price: <span class="price">${priceUSD}</span></p>
-        <p>Min Donation: <strong>${crypto.min}</strong></p>
-      `;
-      cardsContainer.appendChild(card);
-    });
-  } catch (error) {
-    cardsContainer.innerHTML = `<p style="color:#ff0044; font-weight:bold;">Failed to fetch crypto prices.</p>`;
-  }
-}
-fetchCryptoPrices();
-setInterval(fetchCryptoPrices, 60000); // Refresh every 60 seconds
 
 // --- Confetti Effect ---
 let confettiInterval;
@@ -212,9 +109,44 @@ const quotes = [
   "“One Chance. Infinite possibilities.”"
 ];
 
+const quoteDisplay = document.getElementById('quoteDisplay');
 function updateQuote() {
   const idx = Math.floor(Math.random() * quotes.length);
   quoteDisplay.textContent = quotes[idx];
 }
 setInterval(updateQuote, 8000);
 updateQuote();
+
+// --- Fetch Crypto Prices and display cards ---
+const cardsContainer = document.getElementById('cardsContainer');
+
+async function fetchCryptoPrices() {
+  try {
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin&vs_currencies=usd');
+    const data = await res.json();
+    cardsContainer.innerHTML = '';
+
+    const cryptos = [
+      { id: 'bitcoin', name: 'Bitcoin', symbol: 'BTC' },
+      { id: 'ethereum', name: 'Ethereum', symbol: 'ETH' },
+      { id: 'binancecoin', name: 'Binance Coin', symbol: 'BNB' },
+    ];
+
+    cryptos.forEach(coin => {
+      const card = document.createElement('div');
+      card.className = 'crypto-card';
+
+      card.innerHTML = `
+        <h3>${coin.name} (${coin.symbol})</h3>
+        <p>Price: $${data[coin.id].usd.toLocaleString()}</p>
+        <p>Description: Placeholder description about ${coin.name}.</p>
+      `;
+
+      cardsContainer.appendChild(card);
+    });
+  } catch (error) {
+    cardsContainer.innerHTML = `<p style="color:#ff0044; font-weight:bold;">Failed to fetch crypto prices.</p>`;
+  }
+}
+fetchCryptoPrices();
+setInterval(fetchCryptoPrices, 60000); // Refresh every 60 seconds
