@@ -1,58 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>One Chance - Spirited Away Style</title>
+  <title>One Chance - Crypto Pool</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>🚀 One Chance</h1>
-      <p>Invest a little crypto, win a lot — Break free from 9-5</p>
+      <h1>🚀 One Chance - Make Millions Possible</h1>
+      <p class="tagline">Send a tiny crypto amount, join the pool, become a millionaire!</p>
     </header>
 
-    <section class="enroll-section card">
-      <p><strong>Step 1:</strong> Send minimum 0.001 ETH/BNB/BTC/PI to:</p>
-      <div class="wallet-copy">
-        <input id="walletAddress" readonly value="0x6f7BB151D8fF02CccdF183917B8aDD81215d1266" />
-        <button onclick="copyWallet()">Copy Address</button>
+    <section class="enroll-section">
+      <p><strong>Step 1:</strong> Send at least <span id="minDonation">0.001</span> ETH / BNB / BTC / PI to this address:</p>
+      <div class="wallet-container">
+        <input id="walletAddress" value="0x6f7BB151D8fF02CccdF183917B8aDD81215d1266" readonly />
+        <button id="copyBtn" aria-label="Copy wallet address">📋 Copy Address</button>
       </div>
 
-      <p><strong>Step 2:</strong> Enter your wallet address</p>
-      <input id="userWallet" placeholder="Your wallet address" />
+      <p><strong>Step 2:</strong> Enter your wallet address:</p>
+      <input id="userWallet" placeholder="Paste your wallet address here" />
 
-      <button onclick="enroll()" class="btn-enroll">Enroll in Pool</button>
-      <p id="message" class="message"></p>
+      <button id="enrollBtn" aria-label="Enroll in daily pool">✅ Enroll Now</button>
+
+      <p id="message" aria-live="polite"></p>
     </section>
 
-    <section class="info-cards-container">
-      <h2>Why One Chance?</h2>
-      <div class="cards-scroll">
-        <div class="info-card">
-          <img src="https://i.imgur.com/jfX0h0K.jpg" alt="Community" />
-          <p>Millions joining daily, creating real wealth.</p>
-        </div>
-        <div class="info-card">
-          <img src="https://i.imgur.com/SHXQ4pM.jpg" alt="Opportunity" />
-          <p>Simple. Fair. Transparent. Everyone has a shot.</p>
-        </div>
-        <div class="info-card">
-          <img src="https://i.imgur.com/Haeb1YO.jpg" alt="Freedom" />
-          <p>Escape 9-5, build your dream life.</p>
-        </div>
+    <section class="status-section">
+      <h2 id="statusMessage" aria-live="polite">🎲 Waiting for today's winner announcement...</h2>
+    </section>
+
+    <section class="cards-section">
+      <h3>Live Crypto Prices & Concept</h3>
+      <div id="cardsContainer" class="cards-container" aria-label="Scrollable crypto prices and concept cards">
+        <!-- Cards inserted by JS -->
       </div>
     </section>
 
-    <section class="result-section card">
-      <h2 id="statusMessage">Waiting for today's winner...</h2>
+    <section class="quotes-section" aria-live="polite" aria-atomic="true">
+      <blockquote id="quoteDisplay"></blockquote>
     </section>
+
   </div>
 
-  <div class="floating-spirits"></div>
+  <canvas id="confettiCanvas"></canvas>
 
-  <script src="confetti.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
