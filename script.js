@@ -39,13 +39,14 @@ window.addEventListener('resize', () => {
   
 // --- Rest of your script.js below ---
 
-// Copy Wallet Address
+// Copy Wallet Address with success/failure handling
 function copyWallet() {
   const walletInput = document.getElementById("walletAddress");
   walletInput.select();
-  walletInput.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(walletInput.value);
-  alert("Wallet address copied!");
+  walletInput.setSelectionRange(0, 99999); // For mobile devices
+  navigator.clipboard.writeText(walletInput.value)
+    .then(() => alert("Wallet address copied!"))
+    .catch(() => alert("Failed to copy wallet address"));
 }
 
 // Enroll user
