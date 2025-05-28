@@ -42,8 +42,9 @@ window.addEventListener('resize', () => {
 // Copy Wallet Address with success/failure handling
 function copyWallet() {
   const walletInput = document.getElementById("walletAddress");
+  walletInput.focus();
   walletInput.select();
-  walletInput.setSelectionRange(0, 99999); // For mobile devices
+  walletInput.setSelectionRange(0, 99999); // for mobile devices
   navigator.clipboard.writeText(walletInput.value)
     .then(() => alert("Wallet address copied!"))
     .catch(() => alert("Failed to copy wallet address"));
